@@ -1,12 +1,14 @@
 // Source for sprite animations: https://youtu.be/1bj7g6sXit8?feature=shared
 
 
-window.addEventListener('load', function() {
+window.addEventListener('load', ()=> {
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = 380;
     canvas.height = 648;
 
+
+// Positions the sprite including size
 class Warrior {
     constructor(canvasWidth, canvasHeight){
         this.canvasWidth = canvasWidth;
@@ -26,16 +28,19 @@ class Warrior {
         this.frameY = 3;
 };
 
+// Used .drawimage to draw Sprite
     draw(context){
         context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width * this.scale, this.height * this.scale)
     }
+
+// Animates Sprite along with function
     update(){
-      // if(this.frameX < 18) this.frameX++
-      // else this.frameX = 0;
         this.frame = this.frame < this.maxFrame ? this.frame + 1 : this.minFrame;
         this.frameX = this.frame % 2;
         this.frameY = Math.floor(this.frame /4);
     }
+
+// Seperates event for each animation move
     setAnimation(newMinFrame, newMaxFrame){
             this.minFrame = newMinFrame;
             this.maxFrame = newMaxFrame;
@@ -45,7 +50,8 @@ class Warrior {
 
 
     const warrior = new Warrior(canvas.width, canvas.height);
-    
+
+// Animates Sprite
     function animate(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         warrior.draw(ctx);
@@ -62,8 +68,8 @@ class Warrior {
 
 
 // Each object has its own image and can change when you change objects     // DONE
-// Progress the story more until almost finshed                             // Easy but waiting on sprite 
-// Start working on sprites and animate them possibly give action in text   // Almost there 
+// Progress the story more until almost finshed                             // Finishing story 
+// Start working on sprites and animate them possibly give action in text   // DONE
 // Make a attack function for sprite    // Function with a button that will change image and anaimation frames
 
 
@@ -150,9 +156,12 @@ function selectOption(option) {
         if (nextTextNodeId == 2.5) {
             imgWarrior.setAttribute('src', textNodes[1].options[0].image)
             console.log('This statement works')
-        } else {
-            imgWarrior.setAttribute('src', textNodes[0].options[0].image)
+        } else if (nextTextNodeId == 7) {
+            imgWarrior.setAttribute('src', textNodes[12].options[0].image)
         }
+        else {
+            imgWarrior.setAttribute('src', textNodes[0].options[0].image)
+        } 
 
     }
 
@@ -213,7 +222,7 @@ const textNodes = [
 
     {
         id: 2,
-        text: "You fall alseep once more but this time you know you won't wake up. Instead you find yourself in a lake of fire surrounded by those like you and your sure this isn't a dream \n\n(You lived a pitiful, lazy life and died)",
+        text: "You fall alseep once more but this time you know you won't wake up. Instead you find yourself in a lake of fire surrounded by those like you and your sure this isn't a dream \n\n(ENDING 1 Sleepy) \n\n\"You lived a pitiful, lazy life and died\"",
         options: [
             {
                 text: "(1) Restart",
@@ -293,7 +302,8 @@ const textNodes = [
                 text: "(2) Attack the stranger" //Attack function?
             },
             {
-                text: "(3) Leave"
+                text: "(3) Leave",
+                nextText: 8
             }
         ],
         image: "/backgrounds/samuraiResting.jpg",
@@ -320,25 +330,69 @@ const textNodes = [
 
     {
         id: 5.2,
-        text: "You are unaware of the war?....After a millennium, some claim it is still going on strong. Everything that the inhabitants of our territory might regard as life was lost in that battle. Before you say that's typical of a war, consider this: it took crops, houses, mothers, fathers, children, and hope. And it happened on a scale you could never have imagined. \n\nAdditionally, a prophecy states that in the far future, Kingdom would rise against Kingdom and nation will rise against nation.",
+        text: "You are unaware of the war?....After a millennium, some claim it is still going on strong. Everything that the inhabitants of our territory might regard as life was lost in that battle. Before you say that's typical of a war, consider this: it took crops, houses, mothers, fathers, children, and hope. And it happened on a scale you could never have imagined and beware of the capital they are not to be trusted. \n\nAdditionally, a prophecy states that in the far future, Kingdom would rise against Kingdom and nation will rise against nation.",
         options: [
             {
-                text: "\n(1) Why can't the war end?"
+                text: "\n(1) Why can't the war end?",
+                nextText: 5.4
+            },
+            {
+                text: "(2) Continue on with your journey",
+                nextText: 7
             }
         ],
         image: "/backgrounds/samuraiResting.jpg",
         alt: "samurai gif image"
     },
+
     {
         id: 5.3,
-        text: "You ask, \"Why did I fight in the war?\"...fought, heh. Although I was general, it took everything away from me.....my wife, my children. Even after everything I did, my nation betrayed me and abandoned me. Since our region was being overrun and those who did nothing killed while attempting to escape, we were forced to fight. In an attempt to protect my family, I enlisted in the military, but it was still insufficient. ",
+        text: "You ask, \"Why did I fight in the war?\"...fought, heh. Although I was general, it took everything away from me.....my wife, my children. Even after everything I did, my nation, the capital betrayed me and abandoned me. Since our region was being overrun and those who did nothing killed while attempting to escape, we were forced to fight. In an attempt to protect my family, I enlisted in the military, but it was still insufficient. ",
         options: [
             {
-                text: "(1) "
+                text: "(1) Why can't the war end?",
+                nextText: 5.4
+            },
+            {
+                text: "(2) Continue on with your journey",
+                nextText: 7
             }
         ],
         image: "/backgrounds/samuraiResting.jpg",
         alt: "samurai gif image"
+    },
+
+    {
+        id: 5.4,
+        text: "It won't end because of the tyrants continue to advocate for war, it won't end...Many fine people will perish as long as they live, simply because it satisfies their vile cravings. I am Jun'ad; please keep this in mind. For my people, it will be of great use to you in the future. farewell, warrior",
+        options: [
+            {
+                text: "(1) leave",
+                nextText: 6
+            }
+        ],
+        image: "/backgrounds/samuraiResting.jpg",
+        alt: "samurai gif image"
+    },
+
+    {
+        id: 6,
+        text: ""
+    },
+
+    {
+        id: 7,
+        text: "After discovering that the capital cannot be trusted, you resolve to pursue it. If you want to know how and why you woke up, that might be your best option.",
+        options: [
+            {
+                text:"(1) onward",
+                image: "/items/mainCharacter/Sprites/2dknight/Run.png",
+                nextText: -1
+
+            }
+        ],
+        image: "/backgrounds/wanderImg.gif",
+        alt: "Traveling pixel gif image"
     },
 
 
