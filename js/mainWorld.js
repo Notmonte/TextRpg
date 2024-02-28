@@ -33,7 +33,7 @@ class Warrior {
         context.drawImage(this.image, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width * this.scale, this.height * this.scale)
     }
 
-// Animates Sprite along with function
+// Animates Sprite
     update(){
         this.frame = this.frame < this.maxFrame ? this.frame + 1 : this.minFrame;
         this.frameX = this.frame % 2;
@@ -51,7 +51,7 @@ class Warrior {
 
     const warrior = new Warrior(canvas.width, canvas.height);
 
-// Animates Sprite
+// Runs function
     function animate(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         warrior.draw(ctx);
@@ -59,7 +59,6 @@ class Warrior {
         requestAnimationFrame(animate);
     }
     animate();
-    
 });
 
 
@@ -148,29 +147,28 @@ function selectOption(option) {
     if (nextTextNodeId <= 0) {
         return startGame()
     }
-    
-    
+
     const runFnc =(option)=> {
 
         console.log(option)
         if (nextTextNodeId == 2.5) {
             imgWarrior.setAttribute('src', textNodes[1].options[0].image)
             console.log('This statement works')
-        } else if (nextTextNodeId == 7) {
+        } 
+        else if (nextTextNodeId == 7) {
             imgWarrior.setAttribute('src', textNodes[12].options[0].image)
-        }
+        } 
         else {
             imgWarrior.setAttribute('src', textNodes[0].options[0].image)
         } 
-
     }
-
 
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 
     runFnc(option);
 };
+
 
 
 
@@ -222,7 +220,7 @@ const textNodes = [
 
     {
         id: 2,
-        text: "You fall alseep once more but this time you know you won't wake up. Instead you find yourself in a lake of fire surrounded by those like you and your sure this isn't a dream \n\n(ENDING 1 Sleepy) \n\n\"You lived a pitiful, lazy life and died\"",
+        text: "You fall alseep once more but this time you know you won't wake up. Instead you find yourself in a lake of fire surrounded by those like you and your sure this isn't a dream \n\n\"You lived a pitiful, lazy life and died\" \n\n\n(ENDING 1 Sleepy)",
         options: [
             {
                 text: "(1) Restart",
@@ -298,12 +296,12 @@ const textNodes = [
                 text: "(1) Walk towards the stranger",
                 nextText: 5.1
             },
+            // {
+            //     text: "(2) Attack the stranger" //Attack function?
+            // },
             {
-                text: "(2) Attack the stranger" //Attack function?
-            },
-            {
-                text: "(3) Leave",
-                nextText: 8
+                text: "(2) Leave",
+                nextText: 100
             }
         ],
         image: "/backgrounds/samuraiResting.jpg",
@@ -368,31 +366,43 @@ const textNodes = [
         options: [
             {
                 text: "(1) leave",
-                nextText: 6
+                nextText: 100
             }
         ],
         image: "/backgrounds/samuraiResting.jpg",
         alt: "samurai gif image"
     },
 
-    {
-        id: 6,
-        text: ""
-    },
 
     {
         id: 7,
-        text: "After discovering that the capital cannot be trusted, you resolve to pursue it. If you want to know how and why you woke up, that might be your best option.",
+        text: "After discovering that the capital cannot be trusted, you resolve to pursue it. If you want to know how and why you woke up, that might be your best option. \n (ENDING 3 Unfulfilled Destiny)",
         options: [
+            // {
+            //     text:"(1) onward",
+            //     image: "/items/mainCharacter/Sprites/2dknight/Run.png",
+            //     nextText: -1
+            // },
             {
-                text:"(1) onward",
-                image: "/items/mainCharacter/Sprites/2dknight/Run.png",
-                nextText: -1
-
-            }
+                text: "(1) continue",
+                nextText: 100
+            },
         ],
         image: "/backgrounds/wanderImg.gif",
         alt: "Traveling pixel gif image"
+    },
+
+    {
+        id: 100,
+        text: "Congrats you beat my project. I wanted to do more on the story but I had to keep it short. I am kinda poud of this project not fully mainly because I wanted to add attack, dodge, and flee buttons for attacking. I'll come back and finish one day don't worry but other than that I hoped you enjoyed this short adventure!\n\n\n (ENDING 4 Github)",
+        options: [
+            {
+                text: "(1) restart",
+                nextText: -1
+            }
+        ],
+        image: "/backgrounds/waterfallTown.gif",
+        alt: "Waterfall village gif image" 
     },
 
 
@@ -456,12 +466,15 @@ const textNodes = [
     },
     {
         id: 'silence',
-        text: "Killing you would bring no pleasure. You will see how your actions have doomed you this day. Farewell Mortal. \n",
+        text: "Killing you would bring no pleasure. You will see how your actions have doomed you this day. Farewell Mortal. \n\n\n (ENDING 2 CURSED)",
         options: [
             {
-
+                text: "(1) continue",
+                nextText: 100
             }
         ],
+        image: "/backgrounds/theDeath.jpg",
+        alt: "Forest Monster gif image"
     }
 ]
 
