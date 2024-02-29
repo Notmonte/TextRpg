@@ -51,6 +51,7 @@ class Warrior {
 
     const warrior = new Warrior(canvas.width, canvas.height);
 
+
 // Runs function
     function animate(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -154,13 +155,12 @@ function selectOption(option) {
         if (nextTextNodeId == 2.5) {
             imgWarrior.setAttribute('src', textNodes[1].options[0].image)
             console.log('This statement works')
-        } 
-        else if (nextTextNodeId == 7) {
-            imgWarrior.setAttribute('src', textNodes[12].options[0].image)
-        } 
-        else {
+        } else if (nextTextNodeId == 7) {
+            imgWarrior.setAttribute('src', textNodes[11].options[0].image)
+        } else {
             imgWarrior.setAttribute('src', textNodes[0].options[0].image)
         } 
+        return;
     }
 
     state = Object.assign(state, option.setState)
@@ -173,9 +173,9 @@ function selectOption(option) {
 
 
 
-const myAudio =()=> {
-    // Might add audio later 
-}
+// const myAudio =()=> {
+//     // Might add audio later 
+// }
 
 
 
@@ -378,13 +378,9 @@ const textNodes = [
         id: 7,
         text: "After discovering that the capital cannot be trusted, you resolve to pursue it. If you want to know how and why you woke up, that might be your best option. \n (ENDING 3 Unfulfilled Destiny)",
         options: [
-            // {
-            //     text:"(1) onward",
-            //     image: "/items/mainCharacter/Sprites/2dknight/Run.png",
-            //     nextText: -1
-            // },
             {
                 text: "(1) continue",
+                image: "/items/mainCharacter/Sprites/2dknight/Run.png",
                 nextText: 100
             },
         ],
